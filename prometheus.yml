@@ -1,0 +1,84 @@
+global:
+  scrape_interval: 2s
+  evaluation_interval: 2s
+
+scrape_configs:
+  - job_name: "auth_service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: [ "host.docker.internal:8081" ]
+
+  - job_name: "user_service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: [ "host.docker.internal:8888" ]
+
+  - job_name: "cart_service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: [ "host.docker.internal:7650" ]
+
+  - job_name: "media_service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: [ "host.docker.internal:7657" ]
+
+  - job_name: "product_service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: [ "host.docker.internal:8645" ]
+
+  - job_name: "search_service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: [ "host.docker.internal:8092" ]
+
+  - job_name: "store_service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: [ "host.docker.internal:8118" ]
+
+  - job_name: "payment_service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets: [ "host.docker.internal:8081" ]
+
+  - job_name: "promotion_service"
+    metrics_path: "/metrics"
+    basic_auth:
+      username: admin
+      password: 123123
+    static_configs:
+      - targets: [ "host.docker.internal:5010" ]
+
+  - job_name: "email_service"
+    metrics_path: "/metrics"
+    basic_auth:
+      username: admin
+      password: 123123
+    static_configs:
+      - targets: [ "host.docker.internal:5015" ]
+
+  - job_name: "delivery_service"
+    metrics_path: "/metrics"
+    basic_auth:
+      username: admin
+      password: 123123
+    static_configs:
+      - targets: [ "host.docker.internal:5005" ]
+
+  - job_name: "order-service-v2"
+    metrics_path: "/metrics"
+    basic_auth:
+      username: admin
+      password: 123123
+    static_configs:
+      - targets: [ "host.docker.internal:5000" ]
+
+  - job_name: "transaction-service"
+    metrics_path: "/metrics"
+    basic_auth:
+      username: admin
+      password: 123123
+    static_configs:
+      - targets: [ "host.docker.internal:5020" ]

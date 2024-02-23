@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      # - ./web.yml:/etc/prometheus/web.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      # - '--web.config.file=/etc/prometheus/web.yml'
+
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - '4040:3000'
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123123@Dat
+      MYSQL_DATABASE: backend_orders_service
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
